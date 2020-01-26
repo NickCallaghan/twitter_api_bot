@@ -10,6 +10,7 @@ I wrote this twitter bot as a learing excercise to start to familiarise myself a
 Retweet and follow options can currently only be turned off in the code. Later plan to enable args from the command line 
 
 ## Setup
+*This setup guide assumes you already have python 3.8 or greater installed*
 1. Clone the repo and cd into it
 ```
 git clone git@github.com:NickCallaghan/twitter_api_bot.git
@@ -33,5 +34,9 @@ api_key = "ADD_YOUR_KEY_HERE"
 api_secret = "ADD_YOUR_KEY_HERE"
 access_token = "ADD_YOUR_KEY_HERE"
 access_token_secret = "ADD_YOUR_KEY_HERE"
+```
+7. Run the bot
+```
+python app.py
 ```
 
