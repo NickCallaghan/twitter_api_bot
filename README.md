@@ -4,8 +4,8 @@ I wrote this twitter bot as a learing excercise to start to familiarise myself a
 
 ## Features
 - Takes a seach term and finds tweets based on it
-- Follow **follow=True** by default,  can be set to false in the code
-- Retweet **retweet=True** by default and **min_num_to_retweet=20**
+- Follow user **follow=True** by default,  can be set to false in the code
+- Retweet the tweet **retweet=True** by default and **min_num_to_retweet=20**
 
 Retweet and follow options can currently only be turned off in the code. Later plan to enable args from the command line 
 
