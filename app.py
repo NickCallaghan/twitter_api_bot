@@ -2,6 +2,8 @@ import tweepy
 import time
 import json
 import sys
+import csv
+import datetime
 
 
 # Generate API Keys from developer.twitter.com
@@ -28,6 +30,8 @@ class text_colors:
 def follow_user(screen_name):
     try:
         api.create_friendship(screen_name)
+        log_entry = [datetime.datetime.today(), screen_name]
+        print_line_to_log(log_entry, "follows.csv")
         print(text_colors.OKGREEN + "followed  🙋‍♂️",
               screen_name + text_colors.ENDC)
     except tweepy.TweepError as e:
@@ -66,6 +70,13 @@ def set_search_term():
         search_term = " ".join(sys.argv[1:])
         return search_term
     return "Python"
+
+
+def print_line_to_log(line, logfile):
+    outputFile = open("logs/" + logfile, 'a', newline='')
+    outputWriter = csv.writer(outputFile)
+    outputWriter.writerow(line)
+    outputFile.close()
 
 
 def main():
