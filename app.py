@@ -1,6 +1,7 @@
 import tweepy
 import time
 import json
+import sys
 
 
 # Generate API Keys from developer.twitter.com
@@ -13,7 +14,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 
 # Terminal Text Colors
-class bcolors:
+class text_colors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -27,7 +28,8 @@ class bcolors:
 def follow_user(screen_name):
     try:
         api.create_friendship(screen_name)
-        print(bcolors.OKGREEN + "followed  🙋‍♂️", screen_name + bcolors.ENDC)
+        print(text_colors.OKGREEN + "followed  🙋‍♂️",
+              screen_name + text_colors.ENDC)
     except tweepy.TweepError as e:
         print(e)
 
@@ -35,7 +37,7 @@ def follow_user(screen_name):
 def retweet_tweet(tweet_id):
     try:
         api.retweet(tweet_id)
-        print(bcolors.OKBLUE + "🐦  RE-TWEETED 🐦" + bcolors.ENDC)
+        print(text_colors.OKBLUE + "🐦  RE-TWEETED 🐦" + text_colors.ENDC)
     except tweepy.TweepError as e:
         print(e)
 
@@ -60,10 +62,22 @@ def search_for_tweets_to_like(
             e.reason
 
 
+def set_search_term():
+    if len(sys.argv) > 1:
+        search_term = " ".join(sys.argv[1:])
+        return search_term
+    return "Python"
+
+
 def main():
-    print(bcolors.WARNING + "Twitter Bot Running...." + bcolors.ENDC)
+    print(text_colors.WARNING + "Twitter Bot Running...." + text_colors.ENDC)
+    # Sets search_term from args or a default of "Python"
+    search_term = set_search_term()
+    print(text_colors.BOLD + "Searching twitter for: " +
+          text_colors.ENDC + search_term)
     while True:
-        search_for_tweets_to_like("python", 50)
+        # App will run continuously
+        search_for_tweets_to_like(search_term, 50)
 
 
 if __name__ == "__main__":
