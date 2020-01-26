@@ -44,18 +44,17 @@ def retweet_tweet(tweet_id):
 
 def search_for_tweets_to_like(
         search_term, numTweets, follow=True, retweet=True, min_num_to_retweet=20):
-    for tweet in tweepy.Cursor(api.search, search_term).items(numTweets):
+    for tweet in tweepy.Cursor(api.search, search_term, lang="en").items(numTweets):
         try:
-            if tweet.lang == "en":
-                print('\n\n--------------------------------------------')
-                print(tweet.text)
-                tweet.favorite()
-                print("🔥 Tweet Liked! 🔥")
-                # Decide whether to FOLLOW or RETWEET
-                if follow == True:
-                    follow_user(tweet.user.screen_name)
-                if tweet.retweet_count > min_num_to_retweet and retweet == True:
-                    retweet_tweet(tweet.id)
+            print('\n\n--------------------------------------------')
+            print(tweet.text)
+            tweet.favorite()
+            print("🔥 Tweet Liked! 🔥")
+            # Decide whether to FOLLOW or RETWEET
+            if follow == True:
+                follow_user(tweet.user.screen_name)
+            if tweet.retweet_count > min_num_to_retweet and retweet == True:
+                retweet_tweet(tweet.id)
             time.sleep(10)
 
         except tweepy.TweepError as e:
