@@ -26,6 +26,8 @@ class text_colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+# Follow user by passing in their screen_name
+
 
 def follow_user(screen_name):
     try:
@@ -38,6 +40,7 @@ def follow_user(screen_name):
         print(e)
 
 
+# Re-tweet by passing in the tweet_id
 def retweet_tweet(tweet_id):
     try:
         api.retweet(tweet_id)
@@ -46,6 +49,23 @@ def retweet_tweet(tweet_id):
         print(e)
 
 
+# Set the search term to the commandline args or the default
+def set_search_term():
+    if len(sys.argv) > 1:
+        search_term = " ".join(sys.argv[1:])
+        return search_term
+    return "Python"
+
+
+# Appends a single line to the end of a specified log file
+def print_line_to_log(line, logfile):
+    outputFile = open("logs/" + logfile, 'a', newline='')
+    outputWriter = csv.writer(outputFile)
+    outputWriter.writerow(line)
+    outputFile.close()
+
+
+# Search for tweets based on the search term.
 def search_for_tweets_to_like(
         search_term, numTweets, follow=True, retweet=True, min_num_to_retweet=20):
     for tweet in tweepy.Cursor(api.search, search_term, lang="en").items(numTweets):
@@ -63,20 +83,6 @@ def search_for_tweets_to_like(
 
         except tweepy.TweepError as e:
             e.reason
-
-
-def set_search_term():
-    if len(sys.argv) > 1:
-        search_term = " ".join(sys.argv[1:])
-        return search_term
-    return "Python"
-
-
-def print_line_to_log(line, logfile):
-    outputFile = open("logs/" + logfile, 'a', newline='')
-    outputWriter = csv.writer(outputFile)
-    outputWriter.writerow(line)
-    outputFile.close()
 
 
 def main():

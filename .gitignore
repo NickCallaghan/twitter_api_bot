@@ -1,5 +1,6 @@
-#VS Code Preferneces
+#VS Code Prefs
 .vscode
+.DS_store
 
 #API Keys
 keys.py
